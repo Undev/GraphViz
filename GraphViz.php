@@ -408,7 +408,11 @@ $wgExtensionCredits['parserhook'][] = array(
 
 		/* put the produced into the website
 		 */
-		@$err = file_get_contents( $src . ".err" );// not really used
+		if (file_exists($src . ".err")) {
+			$err = file_get_contents($src . ".err"); // not really used
+		} else {
+			$err = "";
+		}
 
 		if ( $err != "" ) {
 			$info .= '<div id="toc"><tt>' . $err . '</tt></div>'; // print error message
